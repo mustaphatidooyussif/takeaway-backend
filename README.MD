@@ -1,15 +1,9 @@
-# Creating a RESTful API with Node.js
-This repository accompanies my YouTube video series on building a RESTful API with Node.js: [https://github.com/academind/node-restful-api-tutorial.git](https://github.com/academind/node-restful-api-tutorial.git)
+#Takeaway application backed 
+This is simple restful api is the backend for the online ordering system. 
 
 ## Usage
-Check out the branch you're interested in (i.e. which belongs to the video in my series you just watched), ```git clone``` it and thereafter run ```npm install```.
+1. clone the repository. 
+2. Cd into the cloned repository. 
+3. Run npm install in the terminal to install all dependencies. 
+4. Run npm start to start the server at ```localhost:3000``
 
-Make sure to also add your Mongo Atlas Admin Username to a nodemon.json file (which you have to create).
-
-```
-{
-    "env": {
-        "MONGO_ATLAS_PW": "YOUR_MONGO_USER_PW"
-    }
-}
-```
