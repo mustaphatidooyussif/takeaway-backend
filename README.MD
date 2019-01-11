@@ -1,4 +1,4 @@
-#Takeaway application backed 
+# Takeaway application backed
 This is simple restful api is the backend for the online ordering system. 
 
 ## Usage

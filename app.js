@@ -13,11 +13,8 @@ const itemsRoutes = require('./api/routes/foodItem');
 
 // Connect To Database
 databaseConn.connection();
-
 // On Connection
 databaseConn.success();
-
-
 // On Error
 databaseConn.error();
 
