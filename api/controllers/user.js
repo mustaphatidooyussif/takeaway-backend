@@ -1,7 +1,9 @@
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
-const User = require("../models/user");
 const bcrypt = require("bcryptjs");
+
+const User = require("../models/user");
+
 
 // RETURN ALL USERS
 exports.user_get_all = (req, res, next) => {
@@ -47,7 +49,7 @@ exports.user_create_user = (req, res, next) => {
         .then(user => {
             if (user.length > 1) { //user exist
                 return res.status(409).json({
-                    messege: "email already exist"
+                    message: "email already exist"
                 });
             } else { //user does not exist
                 //hash the password before saving the user
@@ -62,6 +64,7 @@ exports.user_create_user = (req, res, next) => {
                             _id: new mongoose.Types.ObjectId(),
                             name: req.body.name,
                             email: req.body.email,
+                            usertype: req.body.usertype, // whether student/matron/admin
                             password: hash,
                             phone: req.body.phone,
                             photo: req.file.path
