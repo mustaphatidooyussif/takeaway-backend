@@ -1,133 +1,95 @@
 const mongoose = require('mongoose');
-const Menu = require('../models/menu');
+const Service = require('../services/main');
 
-
-// GET: GET ALL MENUS
-exports.menus_get_all = (req, res, next) => {
-    Menu.find()
-        .select("_id name date items")
-        .exec()
-        .then(menus => {
-            console.log(menus);
-            res.status(200).json({
-                message: 'return menus succesfully',
-                menus: menus
-            })
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });;
+async function getAllMenus(req, res, next){
+    const menus = await Service.MenuService.findAllMenus();
+    try{
+        return res.status(200).json({
+            message: 'return succesfully',
+            menus: menus
         });
-
-};
-
-// POST: CREATE A MENU
-exports.menus_create_menu = (req, res, next) => {
-    const menu = new Menu({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        items: req.body.items
-    });
-
-    menu
-        .save()
-        .then(result => {
-            console.log(result);
-            res.status(200).json({
-                message: 'cafeteria created successfully',
-                menu: result,
-                request: {
-                    type: 'POST',
-                    description: 'send post request to create food item',
-                    url: 'http://localhost:3000/food/'
-                }
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-};
-
-// GET: GET A SINGLE MENU
-exports.menus_get_menu = (req, res, next) => {
-    const id = req.params.menuId;
-    Menu
-        .findById(id)
-        .select("_id name date items")
-        .exec()
-        .then(menu => {
-            if (menu) {
-                console.log(menu);
-                res.status(200).json({
-                    message: 'return single menu',
-                    menu: menu,
-                    request: {
-                        type: 'POST',
-                        description: 'send post request to create food item',
-                        url: 'http://localhost:3000/food/'
-                    }
-                });
-
-            } else {
-                console.log(menu);
-                res.status(404).json({
-                    message: 'menu not found'
-                });
-            }
-
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            })
-        });
-};
-
-// PATCH: UPDATE A SINGLE MENU
-exports.menus_update_menu = (req, res, next) => {
-    const id = req.params.menuId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
+    }catch(error){
+        throw error;
     }
-    Menu.update({ _id: id }, { $set: updateOps })
-        .exec()
-        .then(result => {
-            console.log(result);
-            res.status(200).json({
-                message: 'Menu updated succesfully'
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-};
+}
 
-// DELETE: DELETE A SINGLE MENU
-exports.menus_delete_menu = (req, res, next) => {
+async function createNewMenu(req, res, next){
+    const name = req.body.name;
+    const menu = await Service.MenuService.findMenuByName(name);
+    try{
+        if(!menu){
+            const newMenu =  await Service.MenuService.createMenu(req);
+            return res.status(200).json({
+                message: "Menu created",
+                menu: newMenu
+            });
+        }else{
+            return res.status(200).json({
+                message: "Menu alreadyexist"
+            });
+        }
+    }catch(error){
+        throw error;
+    }
+}
+
+async function getMenu(req, res, next){
     const id = req.params.menuId;
-    Menu
-        .remove({ _id: id })
-        .exec()
-        .then(result => {
-            console.log(result);
+    try{
+        const menu = await Service.MenuService.findMenuById(id);
+        if(menu){
+            return res.status(200).json({
+                message: "return a single menu",
+                menu: menu
+            });
+        }else{
             res.status(200).json({
-                messege: 'Menu deleted'
+                message: "Menu not found"
+            })
+        }
+    }catch(error){
+        throw error;
+    }
+}
+
+// // UPDATE A SINGLE menu
+async function EditMenu(req, res, next){
+    const id = req.params.menuId;
+    const menu = await Service.MenuService.findMenuById(id);
+    if(menu){
+        try{
+            const menu = await Service.MenuService.updateMenuSettings(req);
+            return res.status(200).json({
+                message: 'updated succesfully',
+                menu: menu
             });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
+        }catch(error){
+            throw error;
+        }
+    }else{
+        return res.status(200).json({
+            message: "Menu does not exist"
         });
-};
+    }
+
+}
+
+// // DELETE: DELETE A SINGLE meu
+async function deleteMenu(req, res, next){
+    const menuId = req.params.menuId;
+    try{
+        const menu = await Service.MenuService.deleteMenuById(menuId);
+        return res.status(200).json({
+            message: 'Menu deleted'
+        });
+    }catch(error){
+        throw error;
+    }
+    
+}
+
+module.exports.getAllMenus = getAllMenus;
+module.exports.createNewMenu = createNewMenu;
+module.exports.getMenu = getMenu;
+module.exports.EditMenu = EditMenu;
+module.exports.deleteMenu = deleteMenu;

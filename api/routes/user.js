@@ -9,14 +9,15 @@ const uploadUtility = require('../utility/upload');
 
 
 // GET ALL USERS
-router.get("/", checkAuth, UserController.user_get_all);
+router.get("/", UserController.getAllUsers);
 // GET USER BY USERID
-router.get("/:userId", checkAuth, UserController.user_get_user);
-// POST SIGNUP USER
-router.post("/signup", uploadUtility.upload.single('photo'), UserController.user_create_user);
-// POST LOGIN USER
-router.post("/login", UserController.user_login_user);
-//DELETE USER
-router.delete("/:userId", checkAuth, UserController.user_delete_user);
+router.get("/:userId", UserController.findSingleUser);
+// // POST SIGNUP USER
+// router.post("/signup", uploadUtility.upload.single('photo'), UserController.user_create_user);
+router.post("/signup",  UserController.signUpUser);
+// // POST LOGIN USER
+// router.post("/login", UserController.user_login_user);
+// //DELETE USER
+router.delete("/:userId", UserController.deleteUser);
 
 module.exports = router;

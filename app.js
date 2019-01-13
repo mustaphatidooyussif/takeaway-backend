@@ -39,7 +39,7 @@ app.use((req, res, next) => {
 });
 
 // Routes which should handle requests
-app.use("/orders", orderRoutes);
+// app.use("/orders", orderRoutes);
 app.use("/user", userRoutes);
 app.use("/cafeterias", cafeteriaRoutes);
 app.use("/menus", menuRoutes);
