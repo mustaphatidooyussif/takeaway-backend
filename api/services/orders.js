@@ -41,9 +41,23 @@ async function createOrder(req){
     } 
 }
 
-module.export = {
+async function editOrder(req){
+    const id = req.params.orderId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    try{
+        return Cafeteria.update({ _id: id }, { $set: updateOps });
+    }catch(error){
+        throw new Error('could not update order');
+    }
+}
+
+module.exports = {
     deleteOrderById,
     findAllOrders,
     findOrderById,
-    createOrder
+    createOrder,
+    editOrder
 }

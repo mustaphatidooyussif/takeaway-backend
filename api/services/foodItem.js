@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const Item = require('../models/foodItem');
 
 
 async function deleteFoodItemById(itemId){
