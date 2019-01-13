@@ -26,6 +26,14 @@ async function findFoodItemById(itemId){
     }
 }
 
+async function findFoodItemByName(name){
+    try{
+        return Item.findOne({'name': name});
+    }catch(error){
+        throw new Error(`Unable to find food item.`) 
+    }
+}
+
 async function createFoodItem(req){
     const item = new Item({
         _id: new mongoose.Types.ObjectId(),
@@ -45,5 +53,6 @@ module.export = {
     deleteFoodItemById,
     findAllFooodItems,
     findFoodItemById,
-    createFoodItem
+    createFoodItem,
+    findFoodItemByName
 }

@@ -25,6 +25,14 @@ async function findMenuById(menuId){
     }
 }
 
+async function findMenuByName(menuName){
+    try{
+        return Menu.findOne({'name': menuName});
+    }catch(error){
+        throw new Error(`Unable to find menu.`) 
+    }
+}
+
 async function createMenu(req){
     const menu = new Menu({
         _id: new mongoose.Types.ObjectId(),
@@ -40,9 +48,24 @@ async function createMenu(req){
     } 
 }
 
-module.export ={
+async function updateMenuSettings(req){
+    const id = req.params.menuId;
+    const updateOps = {};
+    for (const ops of req.body) {
+        updateOps[ops.propName] = ops.value;
+    }
+    try{
+        return Menu.update({ _id: id }, { $set: updateOps });
+    }catch(error){
+        throw new Error('could not update Menu');
+    }
+}
+
+module.exports ={
     deleteMenuById,
     findAllMenus,
     findMenuById,
-    createMenu
+    createMenu,
+    findMenuByName,
+    updateMenuSettings
 }
