@@ -1,120 +1,96 @@
 const mongoose = require('mongoose');
 const Cafeteria = require('../models/cafeterias');
+const Service =  require('../services/main');
 
 
 // GET: GET ALL CAFETERIAS
-exports.cafeterias_get_all = (req, res, next) => {
-    Cafeteria.find()
-        .exec()
-        .then(cafeteria => {
-            console.log(cafeteria);
-            res.status(200).json({
-                message: 'return menus succesfully',
-                cafeteria: cafeteria
-            })
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });;
-        });
-
-};
-
-//POST: CREATE A SINGLE CAFETERIA
-exports.cafeterias_create_cafeteria = (req, res, next) => {
-    const cafeteria = new Cafeteria({
-        _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        menus: req.body.menus,
-        matrons: req.body.matrons,
-        location: req.body.location
-    });
-
-    cafeteria
-        .save()
-        .then(result => {
-            console.log(result);
-            res.status(200).json(result);
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
+async function getAllCafeterias(req, res, next){
+    const cafeterias =  await Service.CafeteriaService.findAllCafeterias();
+    try{
+        if(cafeterias){
+           return res.status(200).json(cafeterias);
+        }else{
+           return res.status(200).json({
+                message: 'No cafeteria found'
             });
-        });
-};
-
-// GET: GET A SINGLE CAFETERIA
-exports.cafeterias_get_cafeteria = (req, res, next) => {
-    const id = req.params.cafeteriaId;
-    Cafeteria
-        .findById(id)
-        .exec()
-        .then(cafeteria => {
-            if (cafeteria) {
-                console.log(cafeteria);
-                res.status(200).json({
-                    message: 'return single cafeteria',
-                    cafeteria: cafeteria
-                });
-
-            } else {
-                console.log(cafeteria);
-                res.status(404).json({
-                    message: 'cafeteria not found'
-                });
-            }
-
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            })
-        });
-};
-
-// PATCH: UPDATE A SINGLE CAFETERIA
-exports.cafeterias_update_cafeteria = (req, res, next) => {
-    const id = req.params.cafeteriaId;
-    const updateOps = {};
-    for (const ops of req.body) {
-        updateOps[ops.propName] = ops.value;
+        }
+    }catch(error){
+        throw error;
     }
-    Cafeteria.update({ _id: id }, { $set: updateOps })
-        .exec()
-        .then(result => {
-            console.log(result);
-            res.status(200).json({
-                message: 'cafeteria updated succesfully'
-            });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
-        });
-};
+}
 
-// DELETE: DELETE A SINGLE CAFETRIA
-exports.cafeterias_delete_cafeteria = (req, res, next) => {
-    const id = req.params.cafeteriaId;
-    Cafeteria
-        .remove({ _id: id })
-        .exec()
-        .then(result => {
-            console.log(result);
-            res.status(200).json({
-                messege: 'cafeteria deleted'
+// // CREATE A SINGLE CAFETERIA
+async function createNewCafeteria(req, res, next){
+    const name = req.body.name;
+    //check if cafeteria already exist
+    const cafeteria = await Service.CafeteriaService.findCafeteriaByName(name);
+    if(!cafeteria){ //not exist
+        try{
+            //create new cafeteria
+            const cafeteria = await Service.CafeteriaService.createCafeteria(req);
+            return res.status(200).json({
+                message: "cafeteria created",
+                cafeteria: cafeteria
             });
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json({
-                error: err
-            });
+        }catch(error){
+            throw error;
+        }
+    }else{//exist
+        return res.status(200).json({
+            message: "Cafeteria already exists"
         });
-};
+    }
+    
+}
+
+// // GET A SINGLE CAFETERIA
+async function findSingleCafeteria(req, res, next){
+    const cafeteriaId = req.params.cafeteriaId;
+    const cafeteria = await Service.CafeteriaService.findCafeteriaById(cafeteriaId);
+    try{
+        if(cafeteria){
+            return res.status(200).json({
+                message: "return cafeteria",
+                cafeteria: cafeteria
+            });
+        }else{
+            return res.status(200).json({
+                message: "cafeteria not found"
+            });
+        }
+        }catch(error){
+            throw error;
+        }
+}
+   
+// // DELETE: DELETE A SINGLE CAFETRIA
+async function deleteCafeteria(req, res, next){
+    const cafeteriaId = req.params.cafeteriaId;
+    try{
+        const cafeteria = await Service.CafeteriaService.deleteCafeteriaById(cafeteriaId);
+        return res.status(200).json({
+            message: 'cafeteria deleted'
+        });
+    }catch(error){
+        throw error;
+    }
+    
+}
+
+// // UPDATE A SINGLE CAFETERIA
+async function EditCafeteria(req, res, next){
+    try{
+        const cafeteria = await Service.CafeteriaService.updateCafeteriaSettings(req);
+        return res.status(200).json({
+            message: 'updated succesfully'
+        });
+    }catch(error){
+        throw error;
+    }
+}
+
+module.exports.getAllCafeterias = getAllCafeterias;
+module.exports.createNewCafeteria = createNewCafeteria;
+module.exports.findSingleCafeteria = findSingleCafeteria;
+module.exports.deleteCafeteria = deleteCafeteria;
+module.exports.EditCafeteria = EditCafeteria;

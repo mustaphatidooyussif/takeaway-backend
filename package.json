@@ -12,12 +12,13 @@
         "restful",
         "api"
     ],
-    "author": "Maximilian Schwarzmüller",
+    "author": "Atule and Mustapha",
     "license": "ISC",
     "dependencies": {
         "bcryptjs": "^2.4.3",
         "body-parser": "^1.18.2",
         "express": "^4.16.2",
+        "express-async-wrap": "^1.0.0",
         "jsonwebtoken": "^8.1.0",
         "mocha": "^5.2.0",
         "mongoose": "^4.13.5",
