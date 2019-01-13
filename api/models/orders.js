@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const OrderSchema = mongoose.Schema({
     _id: mongoose.Schema.Types.ObjectId,
-    user: { type: String, required: true },
+    user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     matron: { type: String, default: null },
     items: [{
         type: mongoose.Schema.Types.ObjectId,
