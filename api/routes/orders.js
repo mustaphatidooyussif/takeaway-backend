@@ -1,32 +1,18 @@
 const express = require("express");
 const router = express.Router();
-const checkAuth = require('../middleware/check-auth');
 
-// const OrdersController = require('../controllers/orders');
+const checkAuth = require('../middleware/check-auth');
+const OrdersController = require('../controllers/orders');
 
 // Handle incoming GET requests to /orders
-router.get("/", (req, res, next) => {
-    res.status(200).json({
-        messege: 'get request'
-    })
-});
-
-router.post("/", (req, res, next) => {
-    res.status(200).json({
-        messege: 'post request'
-    })
-});
-
-router.get("/:orderId", (req, res, next) => {
-    res.status(200).json({
-        messege: 'get request'
-    })
-});
-
-router.delete("/:orderId", checkAuth, (req, res, next) => {
-    res.status(200).json({
-        message: 'delete request'
-    })
-});
+router.get("/", checkAuth, OrdersController.orders_get_all);
+// POST /ORDERS: CREATE ORDER 
+router.post("/", checkAuth, OrdersController.orders_create_order);
+// GET /ORDERS/:ORDERID: GET A SINGLE ORDER
+router.get("/:orderId", checkAuth, OrdersController.orders_get_order);
+// UPDATE /ORDERS/:ORDERID
+router.patch("/:orderId", checkAuth, OrdersController.orders_update_order);
+// DELETE /ORDERS/ORDERID
+router.delete("/:orderId", checkAuth, OrdersController.orders_delete_order);
 
 module.exports = router;
