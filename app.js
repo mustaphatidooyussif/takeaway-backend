@@ -10,6 +10,8 @@ const userRoutes = require('./api/routes/user');
 const cafeteriaRoutes = require('./api/routes/cafeterias');
 const menuRoutes = require('./api/routes/menus');
 const itemsRoutes = require('./api/routes/foodItem');
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./docs/swagger.json');
 
 // Connect To Database
 databaseConn.connection();
@@ -20,10 +22,13 @@ databaseConn.error();
 
 mongoose.Promise = global.Promise;
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use(morgan("dev"));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
+
 
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -39,7 +44,7 @@ app.use((req, res, next) => {
 });
 
 // Routes which should handle requests
-// app.use("/orders", orderRoutes);
+app.use("/orders", orderRoutes);
 app.use("/user", userRoutes);
 app.use("/cafeterias", cafeteriaRoutes);
 app.use("/menus", menuRoutes);
