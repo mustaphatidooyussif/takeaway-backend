@@ -5,7 +5,107 @@
       "description": "This is a simple API documentation to help the front end development.",
       "version": "v2"
     },
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
     "paths": {
+      "/user": {
+        "get": {
+          "operationId": "user",
+          "summary": "List all users",
+          "responses": {
+            "200": {
+              "description": "Success",
+              "examples": {
+                "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+              }
+            },
+            "300": {
+              "description": "200 300 response",
+              "examples": {
+                "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+              }
+            }
+          }
+        },
+        "post": {
+            "operationId": "user",
+            "summary": "create a new user",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "patch": {
+            "operationId": "user",
+            "summary": "Edit an existing user.",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "delete": {
+            "operationId": "user",
+            "summary": "Delete an existing user.",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          }
+      },
+      "/user/{userId}": {
+        "get": {
+          "operationId": "user",
+          "summary": "Info for a specific user",
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "description": "The id of the user to retrieve",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "examples": {
+                "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+              }
+            },
+            "300": {
+              "description": "200 300 response",
+              "examples": {
+                "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+              }
+            }
+          }
+        }
+      },
       "/cafeterias": {
         "get": {
           "operationId": "cafeterias",
@@ -42,33 +142,242 @@
                 }
               }
             }
+          },
+          "patch": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "delete": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
           }
       },
-      "/v2": {
+      "/menus": {
         "get": {
-          "operationId": "getVersionDetailsv2",
-          "summary": "Show API version details",
+          "operationId": "cafeterias",
+          "summary": "List cafeterias",
           "produces": [
             "application/json"
           ],
           "responses": {
             "200": {
-              "description": "200 203 response",
+              "description": "Success",
               "examples": {
-                "application/json": "{\n    \"version\": {\n        \"status\": \"CURRENT\",\n        \"updated\": \"2011-01-21T11:33:21Z\",\n        \"media-types\": [\n            {\n                \"base\": \"application/xml\",\n                \"type\": \"application/vnd.openstack.compute+xml;version=2\"\n            },\n            {\n                \"base\": \"application/json\",\n                \"type\": \"application/vnd.openstack.compute+json;version=2\"\n            }\n        ],\n        \"id\": \"v2.0\",\n        \"links\": [\n            {\n                \"href\": \"http://127.0.0.1:8774/v2/\",\n                \"rel\": \"self\"\n            },\n            {\n                \"href\": \"http://docs.openstack.org/api/openstack-compute/2/os-compute-devguide-2.pdf\",\n                \"type\": \"application/pdf\",\n                \"rel\": \"describedby\"\n            },\n            {\n                \"href\": \"http://docs.openstack.org/api/openstack-compute/2/wadl/os-compute-2.wadl\",\n                \"type\": \"application/vnd.sun.wadl+xml\",\n                \"rel\": \"describedby\"\n            },\n            {\n              \"href\": \"http://docs.openstack.org/api/openstack-compute/2/wadl/os-compute-2.wadl\",\n              \"type\": \"application/vnd.sun.wadl+xml\",\n              \"rel\": \"describedby\"\n            }\n        ]\n    }\n}"
+                "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
               }
             },
-            "203": {
-              "description": "200 203 response",
+            "300": {
+              "description": "200 300 response",
               "examples": {
-                "application/json": "{\n    \"version\": {\n        \"status\": \"CURRENT\",\n        \"updated\": \"2011-01-21T11:33:21Z\",\n        \"media-types\": [\n            {\n                \"base\": \"application/xml\",\n                \"type\": \"application/vnd.openstack.compute+xml;version=2\"\n            },\n            {\n                \"base\": \"application/json\",\n                \"type\": \"application/vnd.openstack.compute+json;version=2\"\n            }\n        ],\n        \"id\": \"v2.0\",\n        \"links\": [\n            {\n                \"href\": \"http://23.253.228.211:8774/v2/\",\n                \"rel\": \"self\"\n            },\n            {\n                \"href\": \"http://docs.openstack.org/api/openstack-compute/2/os-compute-devguide-2.pdf\",\n                \"type\": \"application/pdf\",\n                \"rel\": \"describedby\"\n            },\n            {\n                \"href\": \"http://docs.openstack.org/api/openstack-compute/2/wadl/os-compute-2.wadl\",\n                \"type\": \"application/vnd.sun.wadl+xml\",\n                \"rel\": \"describedby\"\n            }\n        ]\n    }\n}"
+                "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
               }
             }
           }
-        }
+        },
+        "post": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "patch": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "delete": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          }
+      },
+      "/orders": {
+        "get": {
+          "operationId": "cafeterias",
+          "summary": "List cafeterias",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "examples": {
+                "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+              }
+            },
+            "300": {
+              "description": "200 300 response",
+              "examples": {
+                "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+              }
+            }
+          }
+        },
+        "post": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "patch": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "delete": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          }
+      },
+      "/food": {
+        "get": {
+          "operationId": "cafeterias",
+          "summary": "List cafeterias",
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "examples": {
+                "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+              }
+            },
+            "300": {
+              "description": "200 300 response",
+              "examples": {
+                "application/json": "{\n    \"versions\": [\n        {\n            \"status\": \"CURRENT\",\n            \"updated\": \"2011-01-21T11:33:21Z\",\n            \"id\": \"v2.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v2/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        },\n        {\n            \"status\": \"EXPERIMENTAL\",\n            \"updated\": \"2013-07-23T11:33:21Z\",\n            \"id\": \"v3.0\",\n            \"links\": [\n                {\n                    \"href\": \"http://127.0.0.1:8774/v3/\",\n                    \"rel\": \"self\"\n                }\n            ]\n        }\n    ]\n}"
+              }
+            }
+          }
+        },
+        "post": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "patch": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          },
+          "delete": {
+            "operationId": "cafeterias",
+            "summary": "create cafeterias",
+            "produces": [
+              "application/json"
+            ],
+            "responses": {
+              "200": {
+                "description": "Success",
+                "examples": {
+                  "application/json": [ {"_id": "5c3a9ce115878334c0dda9a9", "name": "Akorno", "location": "Ashesi", "date": "2019-01-13T02:05:21.881Z", "matrons": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"], "menus": ["5c3a9ce115878334c0dda9a9", "5c3a9ce115878334c0dda9a9"]}]
+                }
+              }
+            }
+          }
       }
-    },
-    "consumes": [
-      "application/json"
-    ]
+      
+    }
   }

@@ -1,0 +1,582 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "title": "TakeAway API documentation",
+      "description": "This is a simple API documentation to help the front end development.",
+      "version": "v2"
+    },
+    "consumes": [
+      "application/json"
+    ],
+    "produces": [
+      "application/json"
+    ],
+    "paths": {
+      "/user": {
+        "get": {
+          "summary": "List all users",
+          "operationId": "getUsers",
+          "tags": [
+            "Users"
+          ],
+          "responses": {
+            "200": {
+              "description": "An paged array of pets",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a user",
+          "operationId": "createUsers",
+          "tags": [
+            "Users"
+          ],
+          "responses": {
+            "201": {
+              "description": "user sign up"
+            }
+          }
+        },
+        "patch": {
+            "summary": "edit a user",
+            "operationId": "editUser",
+            "tags": [
+              "Users"
+            ],
+            "responses": {
+              "200": {
+                "description": "user updated"
+              }
+            }
+          },
+          "delete": {
+            "summary": "delete a user",
+            "operationId": "deleteUsers",
+            "tags": [
+              "Users"
+            ],
+            "responses": {
+              "200": {
+                "description": "user deleted"
+              }
+            }
+          }
+      },
+      "/user/{userId}": {
+        "get": {
+          "summary": "Info for a specific user",
+          "operationId": "showUserById",
+          "tags": [
+            "Users"
+          ],
+          "parameters": [
+            {
+              "name": "userId",
+              "in": "path",
+              "required": true,
+              "description": "The id of the user to retrieve",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Expected response to a valid request",
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          }
+        }
+      },
+      "/cafeterias": {
+        "get": {
+          "summary": "List all Cafeterias",
+          "operationId": "getUsers",
+          "tags": [
+            "Cafeteria"
+          ],
+          "responses": {
+            "200": {
+              "description": "return all Cafeterias succesfully",
+              "schema": {
+                "$ref": "#/definitions/Cafeteria"
+              }
+            }
+          }
+        },
+        "post": {
+          "summary": "Create a Cafeteria",
+          "operationId": "createCafeteria",
+          "tags": [
+            "Cafeteria"
+          ],
+          "responses": {
+            "201": {
+              "description": "Cafeteria created"
+            }
+          }
+        },
+        "patch": {
+            "summary": "edit a Cafeteria",
+            "operationId": "editCafeteria",
+            "tags": [
+              "Cafeteria"
+            ],
+            "responses": {
+              "200": {
+                "description": "Cafeteria updated"
+              }
+            }
+          },
+          "delete": {
+            "summary": "delete a Cafeteria",
+            "operationId": "deleteCafeteria",
+            "tags": [
+              "Cafeteria"
+            ],
+            "responses": {
+              "200": {
+                "description": "Cafeteria deleted"
+              }
+            }
+          }
+      },
+      "/cafeterias/{cafeteriaId}": {
+        "get": {
+          "summary": "Info for a specific Cafeteria",
+          "operationId": "showCafeteriaById",
+          "tags": [
+            "Cafeteria"
+          ],
+          "parameters": [
+            {
+              "name": "cafeteriaId",
+              "in": "path",
+              "required": true,
+              "description": "The id of the Cafeteria to retrieve",
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Expected response to a valid request",
+              "schema": {
+                "$ref": "#/definitions/Cafeteria"
+              }
+            }
+          }
+        }
+     },
+        "/menus": {
+            "get": {
+              "summary": "List all Menus",
+              "operationId": "getUsers",
+              "tags": [
+                "Menu"
+              ],
+              "responses": {
+                "200": {
+                  "description": "return successufully",
+                  "schema": {
+                    "$ref": "#/definitions/Menu"
+                  }
+                }
+              }
+            },
+            "post": {
+              "summary": "Create a Menu",
+              "operationId": "createMenu",
+              "tags": [
+                "Menu"
+              ],
+              "responses": {
+                "200": {
+                  "description": "created successfully"
+                }
+              }
+            },
+            "patch": {
+                "summary": "edit a Menu",
+                "operationId": "editMenu",
+                "tags": [
+                  "Menu"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Menu updated"
+                  }
+                }
+              },
+              "delete": {
+                "summary": "delete a Menu",
+                "operationId": "deleteMenu",
+                "tags": [
+                  "Menu"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Menu deleted"
+                  }
+                }
+              }
+          },
+          "/menus/{menuId}": {
+            "get": {
+              "summary": "Info for a specific Menu",
+              "operationId": "showMenuById",
+              "tags": [
+                "Menu"
+              ],
+              "parameters": [
+                {
+                  "name": "menuId",
+                  "in": "path",
+                  "required": true,
+                  "description": "The id of the useMenur to retrieve",
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Expected response to a valid request",
+                  "schema": {
+                    "$ref": "#/definitions/Menus"
+                  }
+                }
+              }
+            }
+          },
+          "/orders": {
+            "get": {
+              "summary": "List all Orders",
+              "operationId": "getUsers",
+              "tags": [
+                "Order"
+              ],
+              "responses": {
+                "200": {
+                  "description": "return orders successfully",
+                  "schema": {
+                    "$ref": "#/definitions/Orders"
+                  }
+                }
+              }
+            },
+            "post": {
+              "summary": "Create an Order",
+              "operationId": "createOrder",
+              "tags": [
+                "Order"
+              ],
+              "responses": {
+                "200": {
+                  "description": "order created"
+                }
+              }
+            },
+            "patch": {
+                "summary": "edit an Order",
+                "operationId": "editOrder",
+                "tags": [
+                  "Order"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Order updated"
+                  }
+                }
+              },
+              "delete": {
+                "summary": "delete an Order",
+                "operationId": "deleteOrder",
+                "tags": [
+                  "Order"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Order deleted"
+                  }
+                }
+              }
+          },
+          "/orders/{orderId}": {
+            "get": {
+              "summary": "Info for a specific useOrderr",
+              "operationId": "showOrderById",
+              "tags": [
+                "Order"
+              ],
+              "parameters": [
+                {
+                  "name": "orderId",
+                  "in": "path",
+                  "required": true,
+                  "description": "The id of the Order to retrieve",
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Expected response to a valid request",
+                  "schema": {
+                    "$ref": "#/definitions/Order"
+                  }
+                }
+              }
+            }
+          },
+          "/food": {
+            "get": {
+              "summary": "List all food items",
+              "operationId": "getItem",
+              "tags": [
+                "Item"
+              ],
+              "responses": {
+                "200": {
+                  "description": "return all food items",
+                  "schema": {
+                    "$ref": "#/definitions/Items"
+                  }
+                }
+              }
+            },
+            "post": {
+              "summary": "Create a user",
+              "operationId": "createUsers",
+              "tags": [
+                "Item"
+              ],
+              "responses": {
+                "201": {
+                  "description": "item created"
+                }
+              }
+            },
+            "patch": {
+                "summary": "edit an Item",
+                "operationId": "editItem",
+                "tags": [
+                  "Item"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Item updated"
+                  }
+                }
+              },
+              "delete": {
+                "summary": "delete an item",
+                "operationId": "deleteItem",
+                "tags": [
+                  "Item"
+                ],
+                "responses": {
+                  "200": {
+                    "description": "Item deleted"
+                  }
+                }
+              }
+          },
+          "/food/{itemId}": {
+            "get": {
+              "summary": "Info for a specific food item",
+              "operationId": "showItemById",
+              "tags": [
+                "Item"
+              ],
+              "parameters": [
+                {
+                  "name": "itemId",
+                  "in": "path",
+                  "required": true,
+                  "description": "The id of the food item to retrieve",
+                  "type": "string"
+                }
+              ],
+              "responses": {
+                "200": {
+                  "description": "Expected response to a valid request",
+                  "schema": {
+                    "$ref": "#/definitions/Item"
+                  }
+                }
+              }
+            }
+          }
+    },
+    "definitions": {
+      "User": {
+        "required": [
+          "id",
+          "name",
+          "email",
+          "usertype",
+          "password"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "photo": {
+            "type": "string"
+          },
+          "usertype": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      },
+      "Users": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "Cafeteria": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "menus": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Menu"
+              }
+          },
+          "matrons": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/User"
+              }
+          },
+          "location": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      },
+      "Cafeterias": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Cafeteria"
+        }
+      },
+      "Menu": {
+        "required": [
+          "id",
+          "name"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+                "$ref": "#/definitions/Item"
+              }
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      },
+      "Menus": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/User"
+        }
+      },
+      "Order": {
+        "required": [
+          "id",
+          "user"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "user": {
+            "type": "string"
+          },
+          "matron": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+      },
+      "Orders": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Order"
+        }
+      },
+      "Item": {
+        "required": [
+          "id",
+          "name",
+          "price"
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "name": {
+            "type": "string"
+          },
+          "price": {
+            "type": "string"
+          },
+          "date": {
+            "type": "string"
+          }
+        }
+      },
+      "Items": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Item"
+        }
+      }
+    }
+  }
+}

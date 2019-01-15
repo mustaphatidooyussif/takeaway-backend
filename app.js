@@ -11,7 +11,7 @@ const cafeteriaRoutes = require('./api/routes/cafeterias');
 const menuRoutes = require('./api/routes/menus');
 const itemsRoutes = require('./api/routes/foodItem');
 const swaggerUi = require('swagger-ui-express');
-const swaggerDocument = require('./docs/swagger.json');
+const swaggerDocument = require('./docs/doc.json');
 
 // Connect To Database
 databaseConn.connection();
@@ -22,7 +22,9 @@ databaseConn.error();
 
 mongoose.Promise = global.Promise;
 
+//swagger
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 app.use(morgan("dev"));
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
