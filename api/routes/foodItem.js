@@ -8,12 +8,12 @@ const fooditemController = require('../controllers/fooditem');
 // GET: ALL FOOD ITEMS
 router.get('/', fooditemController.getAllFoodItems);
 // POST: CREATE FOOD ITEM
-router.post('/', fooditemController.createNewFoodItem);
+router.post('/',checkAuth, fooditemController.createNewFoodItem);
 // // GET: GET A SINGLE FOOD ITEM
 router.get('/:itemId', fooditemController.getFoodItem);
 // //PATCH: UPDATE A FOOD ITEM
-router.patch('/:itemId', fooditemController.EditFoodItem);
+router.patch('/:itemId', checkAuth, fooditemController.EditFoodItem);
 // // DELETE: DELETE A FOOD ITEM
-router.delete('/:itemId', fooditemController.deleteFoodItem);
+router.delete('/:itemId', checkAuth, fooditemController.deleteFoodItem);
 
 module.exports = router;

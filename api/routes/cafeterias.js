@@ -7,12 +7,12 @@ const cafeteriaController = require('../controllers/cafeterias');
 // GET:  GET ALL CAFETERIAS
 router.get('/', cafeteriaController.getAllCafeterias);
 // POST: CREATE A CAFETERIA
-router.post('/', cafeteriaController.createNewCafeteria);
+router.post('/', checkAuth, cafeteriaController.createNewCafeteria);
 // // GET: GET A SINGLE CAFETERIA
 router.get('/:cafeteriaId', cafeteriaController.findSingleCafeteria);
 // // PATCH: UPDATE A SINGLE CAFETERIA
-router.patch('/:cafeteriaId', cafeteriaController.EditCafeteria);
+router.patch('/:cafeteriaId', checkAuth, cafeteriaController.EditCafeteria);
 // // DALETE: DELETE A SINGLE CAFETERIA
-router.delete('/:cafeteriaId', cafeteriaController.deleteCafeteria);
+router.delete('/:cafeteriaId', checkAuth, cafeteriaController.deleteCafeteria);
 
 module.exports = router;

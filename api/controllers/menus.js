@@ -4,10 +4,7 @@ const Service = require('../services/main');
 async function getAllMenus(req, res, next){
     const menus = await Service.MenuService.findAllMenus();
     try{
-        return res.status(200).json({
-            message: 'return succesfully',
-            menus: menus
-        });
+        return res.status(200).json(menus);
     }catch(error){
         throw error;
     }
@@ -19,13 +16,13 @@ async function createNewMenu(req, res, next){
     try{
         if(!menu){
             const newMenu =  await Service.MenuService.createMenu(req);
-            return res.status(200).json({
+            return res.status(201).json({
                 message: "Menu created",
                 menu: newMenu
             });
         }else{
             return res.status(200).json({
-                message: "Menu alreadyexist"
+                message: "Menu already exist"
             });
         }
     }catch(error){
@@ -43,7 +40,7 @@ async function getMenu(req, res, next){
                 menu: menu
             });
         }else{
-            res.status(200).json({
+            res.status(404).json({
                 message: "Menu not found"
             })
         }
@@ -59,7 +56,7 @@ async function EditMenu(req, res, next){
     if(menu){
         try{
             const menu = await Service.MenuService.updateMenuSettings(req);
-            return res.status(200).json({
+            return res.status(202).json({
                 message: 'updated succesfully',
                 menu: menu
             });
@@ -67,7 +64,7 @@ async function EditMenu(req, res, next){
             throw error;
         }
     }else{
-        return res.status(200).json({
+        return res.status(404).json({
             message: "Menu does not exist"
         });
     }
@@ -79,7 +76,7 @@ async function deleteMenu(req, res, next){
     const menuId = req.params.menuId;
     try{
         const menu = await Service.MenuService.deleteMenuById(menuId);
-        return res.status(200).json({
+        return res.status(204).json({
             message: 'Menu deleted'
         });
     }catch(error){

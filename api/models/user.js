@@ -40,19 +40,6 @@ userSchema.pre('save', function(next) {
     });
 });
 
-//chech if user already exist
-userSchema.pre('save', function (next) {
-    var self = this;
-    User.find({name : self.name}, function (err, docs) {
-        if (!docs.length){
-            next();
-        }else{                
-            console.log('User exists: ',self.name);
-            next(new Error("user exists!"));
-        }
-    });
-});
-
 //compare passwords
 userSchema.methods.comparePassword = function(candidatePassword, cb) {
     bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {

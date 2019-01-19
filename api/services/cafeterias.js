@@ -4,7 +4,7 @@ const Cafeteria = require('../models/cafeterias');
 
 async function findAllCafeterias(){
     try{
-        return Cafeteria.find();
+        return Cafeteria.find().populate("matrons menus");
     }catch(error){
         throw new Error(`Unable to connect to the database.`);
     }
@@ -29,7 +29,7 @@ async function createCafeteria(req){
 
 async function findCafeteriaById(cafeteriaId){
     try{
-        return Cafeteria.findOne({'_id': cafeteriaId});
+        return Cafeteria.findOne({'_id': cafeteriaId}).populate("matrons menus");
     }catch(errro){
         throw new Error(`Unable to connect to the database.`) 
     }
@@ -45,7 +45,7 @@ async function deleteCafeteriaById(cafeteriaId){
 
 async function findCafeteriaByName (name) {
     try {
-        return Cafeteria.findOne({'name': name});
+        return Cafeteria.findOne({'name': name}).populate("matrons menus");
     } catch (error) {
         throw new Error(`Unable to cafeteria.`)
     }

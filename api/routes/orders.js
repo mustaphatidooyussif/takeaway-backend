@@ -7,12 +7,12 @@ const OrdersController = require('../controllers/orders');
 // Handle incoming GET requests to /orders
 router.get("/", OrdersController.getAllOrders);
 // // POST /ORDERS: CREATE ORDER 
-// router.post("/", checkAuth, OrdersController.);
+router.post("/", checkAuth, OrdersController.createOrder);
 // // GET /ORDERS/:ORDERID: GET A SINGLE ORDER
 router.get("/:orderId", OrdersController.getSingleOrder);
 // // UPDATE /ORDERS/:ORDERID
-router.patch("/:orderId", OrdersController.updateOrder);
+router.patch("/:orderId", checkAuth, OrdersController.updateOrder);
 // // DELETE /ORDERS/ORDERID
-router.delete("/:orderId", OrdersController.deleteOrder);
+router.delete("/:orderId", checkAuth, OrdersController.deleteOrder);
 
 module.exports = router;

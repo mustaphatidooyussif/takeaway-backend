@@ -10,7 +10,7 @@ async function getAllCafeterias(req, res, next){
         if(cafeterias){
            return res.status(200).json(cafeterias);
         }else{
-           return res.status(200).json({
+           return res.status(404).json({
                 message: 'No cafeteria found'
             });
         }
@@ -28,7 +28,7 @@ async function createNewCafeteria(req, res, next){
         try{
             //create new cafeteria
             const cafeteria = await Service.CafeteriaService.createCafeteria(req);
-            return res.status(200).json({
+            return res.status(201).json({
                 message: "cafeteria created",
                 cafeteria: cafeteria
             });
@@ -54,7 +54,7 @@ async function findSingleCafeteria(req, res, next){
                 cafeteria: cafeteria
             });
         }else{
-            return res.status(200).json({
+            return res.status(404).json({
                 message: "cafeteria not found"
             });
         }
@@ -68,7 +68,7 @@ async function deleteCafeteria(req, res, next){
     const cafeteriaId = req.params.cafeteriaId;
     try{
         const cafeteria = await Service.CafeteriaService.deleteCafeteriaById(cafeteriaId);
-        return res.status(200).json({
+        return res.status(201).json({
             message: 'cafeteria deleted'
         });
     }catch(error){
@@ -81,7 +81,7 @@ async function deleteCafeteria(req, res, next){
 async function EditCafeteria(req, res, next){
     try{
         const cafeteria = await Service.CafeteriaService.updateCafeteriaSettings(req);
-        return res.status(200).json({
+        return res.status(202).json({
             message: 'updated succesfully'
         });
     }catch(error){

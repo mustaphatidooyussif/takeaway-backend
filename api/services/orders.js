@@ -6,38 +6,39 @@ async function deleteOrderById(orderId){
     try{
         return Order.remove({ _id: orderId });
     }catch(error){
-        throw new Error('could not delete the Order');
+        throw error; //new Error('could not delete the Order');
     }
 }
 
 async function findAllOrders(){
     try{
-        return Order.find();
+        return Order.find().populate('user items');
     }catch(error){
-        throw new Error(`Unable to orders.`);
+        throw error; //new Error(`Unable to orders.`);
     }
 }
 
 async function findOrderById(orderId){
     try{
-        return Order.findOne({'_id': orderId});
+        return Order.findOne({'_id': orderId}).populate('user items');
     }catch(error){
-        throw new Error(`Unable to find food item.`);
+        throw error; //new Error(`Unable to find food item.`);
     }
 }
 
 async function createOrder(req){
-    const order = new Item({
+    const order = new Order({
         _id: new mongoose.Types.ObjectId(),
-        name: req.body.name,
-        price: req.body.price
+        user: req.body.user,
+        items: req.body.items,
+        matron: req.body.matron
     });
 
     try{
         let newOrder = await order.save();
         return newOrder;
     }catch(error){
-        throw new Error(`could not create the new order`);
+        throw error; //new Error(`could not create the new order`);
     } 
 }
 
@@ -48,9 +49,9 @@ async function editOrder(req){
         updateOps[ops.propName] = ops.value;
     }
     try{
-        return Cafeteria.update({ _id: id }, { $set: updateOps });
+        return Order.update({ _id: id }, { $set: updateOps });
     }catch(error){
-        throw new Error('could not update order');
+        throw error; //new Error('could not update order');
     }
 }
 

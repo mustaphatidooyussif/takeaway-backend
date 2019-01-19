@@ -7,12 +7,12 @@ const menusController = require('../controllers/menus');
 // GET: GET ALL MENU
 router.get('/', menusController.getAllMenus);
 // POST: CREATE A MENU
-router.post('/', menusController.createNewMenu);
+router.post('/', checkAuth, menusController.createNewMenu);
 // // GET: GET A SINGLE MENU
 router.get('/:menuId', menusController.getMenu);
 // // PATCH: UPDATE A SINGLE MENU
-router.patch('/:menuId', menusController.EditMenu);
+router.patch('/:menuId', checkAuth, menusController.EditMenu);
 // // DELETE: DELETE A SINGLE MENU
-router.delete('/:menuId', menusController.deleteMenu);
+router.delete('/:menuId', checkAuth, menusController.deleteMenu);
 
 module.exports = router;

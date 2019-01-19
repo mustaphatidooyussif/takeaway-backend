@@ -26,7 +26,7 @@ mongoose.Promise = global.Promise;
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(morgan("dev"));
-app.use('/uploads', express.static('uploads'));
+app.use('/uploads', express.static('api/uploads'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 

@@ -14,10 +14,12 @@ router.get("/", UserController.getAllUsers);
 router.get("/:userId", UserController.findSingleUser);
 // // POST SIGNUP USER
 // router.post("/signup", uploadUtility.upload.single('photo'), UserController.user_create_user);
-router.post("/signup",  UserController.signUpUser);
+router.post("/signup", uploadUtility.upload.single('photo'),  UserController.signUpUser);
 // // POST LOGIN USER
-// router.post("/login", UserController.user_login_user);
+router.post("/login", UserController.logInUser);
+// //patch USER
+router.patch("/:userId", checkAuth, UserController.EditUser);
 // //DELETE USER
-router.delete("/:userId", UserController.deleteUser);
+router.delete("/:userId", checkAuth, UserController.deleteUser);
 
 module.exports = router;

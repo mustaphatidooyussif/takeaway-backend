@@ -11,7 +11,7 @@ async function deleteMenuById(menuId){
 
 async function findAllMenus(){
     try{
-        return Menu.find();
+        return Menu.find().populate("items");
     }catch(error){
         throw new Error(`Unable to find users.`);
     }
@@ -19,7 +19,7 @@ async function findAllMenus(){
 
 async function findMenuById(menuId){
     try{
-        return Menu.findOne({'_id': menuId});
+        return Menu.findOne({'_id': menuId}).populate("items");
     }catch(error){
         throw new Error(`Unable to find menu.`) 
     }
@@ -27,7 +27,7 @@ async function findMenuById(menuId){
 
 async function findMenuByName(menuName){
     try{
-        return Menu.findOne({'name': menuName});
+        return Menu.findOne({'name': menuName}).populate("items");
     }catch(error){
         throw new Error(`Unable to find menu.`) 
     }

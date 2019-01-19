@@ -21,10 +21,13 @@
           ],
           "responses": {
             "200": {
-              "description": "An paged array of pets",
+              "description": "Return all users",
               "schema": {
                 "$ref": "#/definitions/User"
               }
+            },
+            "404": {
+              "description": "No user found"
             }
           }
         },
@@ -37,6 +40,9 @@
           "responses": {
             "201": {
               "description": "user sign up"
+            },
+            "200": {
+              "description": "user already exist"
             }
           }
         },
