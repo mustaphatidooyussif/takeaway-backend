@@ -1,9 +1,10 @@
 const mongoose = require("mongoose");
+const location = require("./db_location.json");
 
 module.exports = {
     // Connect To Database
     connection: () => {
-        mongoose.connect(process.env.DATABASE, {
+        mongoose.connect(location.MONGO_URL, {
             useMongoClient: true
         });
     },
@@ -11,7 +12,7 @@ module.exports = {
     // On Connection
     success: () => {
         mongoose.connection.on('connected', () => {
-            console.log('Connected to database ' + process.env.DATABASE);
+            console.log('Connected to database ' + location.MONGO_URL);
         });
     },
 
