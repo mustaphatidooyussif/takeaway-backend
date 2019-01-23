@@ -5,13 +5,14 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const databaseConn = require("./api/config/database");
 
-const orderRoutes = require("./api/routes/orders");
-const userRoutes = require('./api/routes/user');
-const cafeteriaRoutes = require('./api/routes/cafeterias');
-const menuRoutes = require('./api/routes/menus');
-const itemsRoutes = require('./api/routes/foodItem');
+// const orderRoutes = require("./api/routes/orders");
+// const userRoutes = require('./api/routes/user');
+// const cafeteriaRoutes = require('./api/routes/cafeterias');
+// const menuRoutes = require('./api/routes/menus');
+// const itemsRoutes = require('./api/routes/foodItem');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDocument = require('./docs/doc.json');
+const routes = require("./api/routes/routes");
 
 // Connect To Database
 databaseConn.connection();
@@ -46,11 +47,11 @@ app.use((req, res, next) => {
 });
 
 // Routes which should handle requests
-app.use("/api/v1/orders", orderRoutes);
-app.use("/api/v1/user", userRoutes);
-app.use("/api/v1/cafeterias", cafeteriaRoutes);
-app.use("/api/v1/menus", menuRoutes);
-app.use("/api/v1/food", itemsRoutes);
+app.use("/api/v1", routes);
+// app.use("/api/v1/user", userRoutes);
+// app.use("/api/v1/cafeterias", cafeteriaRoutes);
+// app.use("/api/v1/menus", menuRoutes);
+// app.use("/api/v1/food", itemsRoutes);
 
 app.use((req, res, next) => {
     const error = new Error("Not found");
